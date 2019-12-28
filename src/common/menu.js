@@ -4,6 +4,7 @@ const menuData = [
             path: 'home',
             name: '首页',
             icon: 'indent',
+            // breadcrumbName:'首页'
         },
         {
             path: 'article',

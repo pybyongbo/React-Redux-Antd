@@ -1,7 +1,7 @@
 import { isUrl } from 'utils/validate';
 const menuData = [
         {
-            path: 'home',
+            path: '/dashboard',
             name: '首页',
             icon: 'indent',
             // breadcrumbName:'首页'

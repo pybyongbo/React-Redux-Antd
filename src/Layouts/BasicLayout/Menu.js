@@ -54,8 +54,8 @@ export default class NavMenu extends React.Component {
             .split('/')
             .filter(item => item !== '')
             .map(path => `/${path}`);
-        console.log('35', paths, this.paths, pathname);
-        console.log('36',this.paths[pathname])
+        // console.log('35', paths, this.paths, pathname);
+        // console.log('36',this.paths[pathname])
         if(pathname.indexOf('detail')>0){//是否详情页面.
             //  详情页面应用list的选中项
             return [paths[0]+'/list'];
@@ -135,7 +135,7 @@ export default class NavMenu extends React.Component {
     render() {
         const { menus } = this.props;
         const { selectedKeys,openKeys } = this.state;
-        console.log('selectedKeys',selectedKeys)
+        // console.log('selectedKeys',selectedKeys)
         return (
             <Menu
                 theme="dark"

@@ -1,5 +1,11 @@
 import { parse, stringify } from 'qs';
 
+export function urlToList(url) {
+    const urllist = url.split('/').filter(i => i);
+    return urllist.map((urlItem, index) => {
+        return `/${urllist.slice(0, index + 1).join('/')}`;
+    });
+}
 export function getPageQuery() {
     return parse(window.location.href.split('?')[1]);
 }
@@ -20,7 +26,7 @@ export function isUrl(path) {
 }
 
 export function getRoutes(path, routerData) {
-    console.log('mytest',routerData)
+    // console.log('mytest',routerData)
     let routes = Object.keys(routerData).filter(routePath => routePath.indexOf(path) === 0 && routePath !== path);
     routes = routes.map(item => item.replace(path, ''));
     const renderRoutes = routes.map(item => ({
@@ -28,6 +34,6 @@ export function getRoutes(path, routerData) {
         key: `${path}${item}`,
         path: `${path}${item}`
     }));
-    console.log('renderRoutes',renderRoutes)
+    // console.log('renderRoutes',renderRoutes)
     return renderRoutes;
 }

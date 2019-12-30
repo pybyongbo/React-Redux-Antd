@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, Table, Tooltip, message, Divider } from 'antd';
+
 import { getPostList } from '../actions';
 import styles from './postList.less';
 
@@ -26,7 +27,6 @@ class ArticleList extends PureComponent {
 
     onChangePagination = newPage => {
 
-        console.log(newPage);
         this.setState({
             current:newPage
         })
@@ -45,7 +45,7 @@ class ArticleList extends PureComponent {
             current:1,
             pageSize: size
         }, () => {
-            console.log(current, size);
+
         });
     };
 

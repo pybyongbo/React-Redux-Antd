@@ -85,27 +85,39 @@ export const getRouterData = () => {
         '/': {
             component: dynamicWrapper(() => import('../Layouts/BasicLayout'))
         },
-        '/home': {
-            name: 'Home',
-            path: '/home',
+        '/dashboard': {
+            name: '工作台',
+            path: 'home',
+            // breadcrumbName:'首页',
             component: dynamicWrapper(() => import('../pages/Home'))
         },
         '/article/list': {
-            name: 'Articlelist',
+            name: '文章列表',
             path: '/articlelist',
             component: dynamicWrapper(() => import('../pages/Article'))
         },
 
         '/article/add': {
-            name: 'Articleadd',
+            name: '新增文章',
             path: '/articleadd',
             component: dynamicWrapper(() => import('../pages/ArticleAdd'))
         },
 
         '/article/detail/:id': {
-            name: 'Articledetail',
+            name: '文章详情',
             path: '/article/detail/id',
             component: dynamicWrapper(() => import('../pages/ArticleDetail'))
+        },
+
+        '/cart': {
+            name: '购物车',
+            path: '/cart',
+            component: dynamicWrapper(() => import('../pages/Cart'))
+        },
+        '/info/userinfo': {
+            name: '用户信息',
+            path: '/info/userinfo',
+            component: dynamicWrapper(() => import('../pages/Cart'))
         },
         '/exception/403': {
             name: 'exception403',

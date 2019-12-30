@@ -27,7 +27,6 @@ class App extends Component {
                         <Route
                             path="/"
                             render={props => {
-                                console.log('p',props)
                                 return <BasicLayout {...props} menus={menuData} routes={routerData} notFound={NotFound} />;
                             }}
                         />

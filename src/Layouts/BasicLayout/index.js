@@ -9,6 +9,8 @@ import NotFound from '../../pages/Exception/404';
 import Menu from "./Menu";
 import Breadcrumb from './Breadcrumb';
 
+
+
 import { getRoutes } from '../../utils/utils';
 
 
@@ -19,9 +21,19 @@ class BasicLayout extends React.Component {
 
     render() {
         const { menus, routes, location, match } = this.props;
+        console.log(111,routes)
         console.log('basiclayout',location.pathname)
         // console.log(1100, match.path, routes);
-        // console.log(666, getRoutes(match.path, routes))
+        console.log(666, getRoutes(match.path, routes));
+
+        let curRouter= getRoutes(match.path, routes).find(item=>{
+           if(item.path === location.pathname)  {
+               return item
+           }
+        });
+
+        let breadPath = [].concat(curRouter)
+        console.log('curRouter',[curRouter])
 
         return (
             <Layout style={{
@@ -38,7 +50,7 @@ class BasicLayout extends React.Component {
                 </Sider>
                 <Layout style={{ marginLeft: 200 }}>
                     <Header style={{ background: '#fff', paddingLeft: 20 }}>
-                        <Breadcrumb />
+                        <Breadcrumb routes={[curRouter]} location={location} breadcrumbNameMap={routes}></Breadcrumb>
                     </Header>
                     <Content
                         style={{ margin: '24px 16px 0', overflow: 'initial' }}
@@ -55,7 +67,7 @@ class BasicLayout extends React.Component {
                                         />
                                     );
                                 })}
-                                <Redirect exact from="/" to="/home" />
+                                <Redirect exact from="" to="/dashboard" />
                                 <Route render={NotFound} />
                             </Switch>
                         </Card>

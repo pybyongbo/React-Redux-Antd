@@ -36,9 +36,23 @@ class IndexPage extends PureComponent {
                             </ul>
                         </Card>
                     </Col>
+
+                    <Col span={12} style={{marginTop:20}}>
+                        <Card title="">
+                            <ol>
+                                <li>面包屑导航</li>
+                            </ol>
+                        </Card>
+                    </Col>
+
+                    <Col span={12} style={{marginTop:20}}>
+                        <Card title="">
+                            <ol>
+                                <li>组件异步加载</li>
+                            </ol>
+                        </Card>
+                    </Col>
                 </Row>
-
-
             </div>
         );
     }

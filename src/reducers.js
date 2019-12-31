@@ -5,9 +5,12 @@ import { combineReducers } from 'redux';
 import { reducer as global } from './global';
 import { reducer as postList } from './pages/Home';
 
+import { reducer as articleDetailinfo } from './pages/ArticleDetail'
+
 export default history =>
     combineReducers({
         router: connectRouter(history),
         global,
-        postList
+        postList,
+        articleDetailinfo
     });

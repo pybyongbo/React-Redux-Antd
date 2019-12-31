@@ -119,6 +119,13 @@ export const getRouterData = () => {
             path: '/info/userinfo',
             component: dynamicWrapper(() => import('../pages/Cart'))
         },
+
+        '/info/modifiy': {
+            name: '修改密码',
+            path: '/info/modifiy',
+            component: dynamicWrapper(() => import('../pages/Cart'))
+        },
+
         '/exception/403': {
             name: 'exception403',
             path: '/exception/403',

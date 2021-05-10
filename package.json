@@ -13,7 +13,7 @@
     "connected-react-router": "^6.2.1",
     "enquire-js": "^0.2.1",
     "history": "^4.10.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "lodash-decorators": "^6.0.1",
     "moment": "^2.23.0",
     "numeral": "^2.0.6",

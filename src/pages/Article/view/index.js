@@ -1,130 +1,137 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Button, Table, Tooltip, message, Divider } from 'antd';
-import { getPostList } from '../actions';
-import styles from './postList.less';
+import React from 'react';
+import { Button, Col, Form, Input, Row, Table, Select } from 'antd';
+// import { WrappedFormUtils } from 'antd/lib/form/Form';
+import { useFormTable } from '@umijs/hooks'
+// import { PaginatedParams } from '@umijs/hooks/lib/useFormTable'
 
-class ArticleList extends PureComponent {
-    state = {
-        current: 1,
-        pageSize: 10,
-        searchObj: {
-            name: '',
-            startOrderDate: '',
-            endOrderDate: ''
-        }
-    };
-    componentDidMount() {
-        this.filterPostList({});
+const { Option } = Select;
+
+
+const getTableData = ({ current, pageSize }, formData) => {
+  let query = `page=${current}&size=${pageSize}`;
+  Object.entries(formData).forEach(([key, value]) => {
+    if (value) {
+      query += `&${key}=${value}`
     }
+  });
 
-    filterPostList = (obj) => {
-        const { dispatch } = this.props;
-        dispatch(getPostList({page:obj.page||1,pageSize:obj.pageSize||10 }));
-    };
+  return fetch(`https://randomuser.me/api?results=55&${query}`)
+    .then(res => res.json())
+    .then(res => ({
+      total: res.info.results,
+      list: res.results,
+    }));
+};
 
-    onChangePagination = newPage => {
+const AppList = (props) => {
+  let [form] = Form.useForm();
+  const { tableProps, search, loading } = useFormTable(getTableData, {
+    defaultPageSize: 5,
+    form:form,
+  });
 
-        console.log(newPage);
-        this.setState({
-            current:newPage
-        })
-        this.filterPostList({
-               page:newPage
-        })
-    };
+  console.log('loading', loading,search);
 
-    onShowSizeChange = (current, size) => {
-        // this.fetchData(current, size);
-        this.filterPostList({
-            page: current,
-            pageSize:size
-        })
-        this.setState({
-            current:1,
-            pageSize: size
-        }, () => {
-            console.log(current, size);
-        });
-    };
+  const { type, changeType, submit, reset } = search;
 
-    render() {
-        const { postList, total, fetchListPending } = this.props;
-        const {current,pageSize} = this.state;
-        const columns = [
-            {
-                title: '序号',
-                dataIndex: 'index',
-                key: 'index',
-                render: (text, record, index) => (current - 1) * pageSize + (index + 1)
-            },
-            {
-                title: '文章标题',
-                dataIndex: 'title',
-                key: 'title'
-            },
-            {
-                title: '发布作者',
-                dataIndex: 'name',
-                key: 'name'
-            },
-            {
-                title: '发布时间',
-                dataIndex: 'moment',
-                key: 'moment',
-                width: 250
-            },
+  const columns = [
+    {
+      title: 'name',
+      dataIndex: 'name.first',
+      render:(value, record) => {
+        // console.log(111,value,record)
+        return <span>{record.name.first} {record.name.last} </span>;
+      }
+    },
+    {
+      title: 'email',
+      dataIndex: 'email',
+    },
+    {
+      title: 'phone',
+      dataIndex: 'phone',
+    },
+    {
+      title: 'gender',
+      dataIndex: 'gender',
+    },
+  ];
 
-            {
-                title: '操作',
-                dataIndex: 'operation',
-                key: 'operation',
-                width:120,
-                render:(text,record)=>{
-                    return (
-                        <Link to={`/article/detail/${record.id}`}>查看详情</Link>
-                    )
-                }
-            },
+  const advanceSearchForm = (
+    <div>
+      <Form form = {form}>
+        <Row gutter={24}>
+          <Col span={8}>
+            <Form.Item label="name" name='name'>
+              <Input placeholder="name" />
+            </Form.Item>
+          </Col>
+          <Col span={8}>
+            <Form.Item label="email" name="email">
+            <Input placeholder="email" />
+            </Form.Item>
+          </Col>
+          <Col span={8}>
+            <Form.Item label="phone" name="phone">
+               <Input placeholder="phone" />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>
+          <Form.Item style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Button type="primary" onClick={submit}>
+              Search
+            </Button>
+            <Button onClick={reset} style={{ marginLeft: 16 }}>
+              Reset
+            </Button>
+            <Button type="link" onClick={changeType}>
+              Simple Search
+            </Button>
+          </Form.Item>
+        </Row>
+      </Form>
+    </div>
+  );
 
-        ]
+  const searchForm = (
+    <div style={{ marginBottom: 16 }}>
+      <Form
+      form = {form}
+      // initialValues={{gender:'male'}}
+      style={{ display: 'flex', justifyContent: 'flex-end' }}
+      >
+        <Form.Item
+          name="gender"
+          initialValue='female'
+        >
+          <Select style={{ width: 120, marginRight: 16 }} onChange={submit}>
+            <Option value="">all</Option>
+            <Option value="male">male</Option>
+            <Option value="female">female</Option>
+          </Select>
+        </Form.Item>
+        <Form.Item name="name">
+          {/* <Input.Search placeholder="enter name" style={{ width: 240 }} onSearch={submit} allowClear/> */}
+          <Input placeholder="enter name" style={{ width: 240 }} allowClear/>
+        </Form.Item>
+        <Form.Item name="name">
+          <Button type="primary" onClick={submit}>Search</Button>
+          {/* <Input placeholder="enter name" style={{ width: 240 }} allowClear/> */}
+        </Form.Item>
+        <Button type="link" onClick={changeType}>
+          Advanced Search
+        </Button>
+      </Form>
+    </div>
+  );
 
-        return (
-            <div className={styles.postList}>
+  return (
+    <div>
+      {type === 'simple' ? searchForm : advanceSearchForm}
+      <Table columns={columns} rowKey="email" {...tableProps} />
+    </div>
+  );
+};
 
-                <h2>koa博客接口测试</h2>
-
-                <Divider dashed />
-
-                <Table
-                    className="mo-table"
-                    rowKey="id"
-                    columns={columns}
-                    dataSource={postList.data || []}
-                    loading={fetchListPending}
-                    pagination={{
-                        current,
-                        total,
-                        // showTotal: this.showTotal,
-                        // size: 'small',
-                        showSizeChanger: true,
-                        onChange: this.onChangePagination,
-                        onShowSizeChange: this.onShowSizeChange
-                    }}
-                />
-            </div>
-        );
-    }
-}
-
-const mapStateToProps = state => ({
-    ...state.postList
-});
-
-const mapDispatchToProps = dispatch => ({ dispatch });
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ArticleList);
+export default AppList;

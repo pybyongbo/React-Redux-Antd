@@ -49,7 +49,7 @@ module.exports = new Promise((resolve, reject) => {
                     compilationSuccessInfo: {
                         messages: [
                             `You can now view ${chalk.bold(packageConfig.name)} in the browser.`,
-                            `${chalk.bold('Local:')}            http://${address.ip('lo')}:${chalk.bold(port)}`,
+                            `${chalk.bold('Local:')}            http://localhost:${chalk.bold(port)}`,
                             `${chalk.bold('On Your Network:')}  http://${address.ip()}:${chalk.bold(port)}/`
                         ]
                     },

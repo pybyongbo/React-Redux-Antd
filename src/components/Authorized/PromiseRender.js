@@ -10,10 +10,10 @@ export default class PromiseRender extends React.PureComponent {
         this.setRenderComponent(this.props);
     }
 
-    componentWillReceiveProps(nextProps) {
-        // new Props enter
-        this.setRenderComponent(nextProps);
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     // new Props enter
+    //     this.setRenderComponent(nextProps);
+    // }
 
     // set render Component : ok or error
     setRenderComponent(props) {

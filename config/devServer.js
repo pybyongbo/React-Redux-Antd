@@ -9,7 +9,7 @@ module.exports = assetsPublicPath => ({
     hot: true,
     contentBase: assetsPublicPath, // since we use CopyWebpackPlugin.
     compress: true,
-    host: HOST || '0.0.0.0',
+    host: HOST || 'localhost',
     port: PORT || 3000,
     open: true,
     historyApiFallback: {
@@ -19,14 +19,21 @@ module.exports = assetsPublicPath => ({
     publicPath: '/',
     proxy: {
         '/post': {
-            // target: 'http://api.annajunen.top',
-            // target: 'http://koa2.901web.com',
-            target: 'http://localhost:4560',
+
+            target: 'http://koa2.901web.com',
+            // target: 'http://localhost:4560',
             changeOrigin: true,
             // pathRewrite: {
             //     "^/papi": ""
             // }
-        }
+        },
+        '/course': {
+          target: 'http://localhost:3001',
+          changeOrigin: true,
+          pathRewrite: {
+              "^/course": ""
+          }
+      }
     },
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchContentBase: true,

@@ -1,7 +1,9 @@
-import { Icon } from 'antd';
+// import { Icon } from 'antd';
+import React from 'react';
+import { createFromIconfontCN } from '@ant-design/icons';
 import IconFont from 'assets/iconfont';
 
-const MIcon = Icon.createFromIconfontCN({
+const MIcon = createFromIconfontCN({
     scriptUrl: IconFont
 });
 

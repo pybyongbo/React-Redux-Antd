@@ -17,8 +17,10 @@ class App extends Component {
         const routerData = getRouterData();
         const menuData = getMenuData();
 
-        // const Home = routerData['/home'].component;
+        const Home = routerData['/home'].component;
         const BasicLayout = routerData['/'].component;
+
+        console.log('BasicLayout',BasicLayout,routerData,menuData)
 
         return (
             <Provider store={store}>
@@ -27,12 +29,15 @@ class App extends Component {
                         <Route
                             path="/"
                             render={props => {
-                                console.log('p',props)
+                                console.log('p',props);
                                 return <BasicLayout {...props} menus={menuData} routes={routerData} notFound={NotFound} />;
                             }}
                         />
+                        {/* <Route path='/' exact={true} component={Home}/> */}
                     </Switch>
+
                 </ConnectedRouter>
+
             </Provider>
         );
     }

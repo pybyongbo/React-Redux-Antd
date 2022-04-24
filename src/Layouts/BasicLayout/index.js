@@ -1,8 +1,6 @@
 import React from 'react';
 import { Route,Redirect, Switch } from "react-router-dom";
-
 import { connect } from 'react-redux';
-
 
 import { Layout, Card, Input } from 'antd';
 import NotFound from '../../pages/Exception/404';
@@ -19,7 +17,7 @@ class BasicLayout extends React.Component {
 
     render() {
         const { menus, routes, location, match } = this.props;
-        console.log('basiclayout',location.pathname)
+        console.log('basiclayout12313',location.pathname)
         // console.log(1100, match.path, routes);
         // console.log(666, getRoutes(match.path, routes))
 

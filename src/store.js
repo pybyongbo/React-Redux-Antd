@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import logger from 'redux-logger';
 import { routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import createRootReducer from './reducers';
@@ -8,7 +9,7 @@ const history = createBrowserHistory();
 
 const historyMiddleware = routerMiddleware(history);
 
-const middlewares = [thunk, historyMiddleware];
+const middlewares = [thunk, historyMiddleware,logger];
 if (process.env.NODE_ENV !== 'production') {
     middlewares.push(require('redux-immutable-state-invariant').default());
 }

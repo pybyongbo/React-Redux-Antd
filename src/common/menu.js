@@ -25,7 +25,7 @@ const menuData = [
   {
     path: 'tabcourse',
     name: '课程管理',
-    icon: 'goods',
+    icon: 'sell',
     children: [
       {
         key: 'add',

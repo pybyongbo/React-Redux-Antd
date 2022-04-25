@@ -1,11 +1,11 @@
-import {  GET_COURSE_FIELD_LIST, GET_COURSE_LIST,CHANGE_COURSE_FIELD} from './actionTypes';
+import { GET_COURSE_FIELD_LIST, GET_COURSE_LIST, CHANGE_COURSE_FIELD, CHANGE_SHOW_TYPE } from './actionTypes';
 
 const initialState = {
   curField: -1,
   coursefieldList: [],
   courseList: [],
   total: 0,
-
+  showType: 'card',
 };
 
 export default (state = initialState, action) => {
@@ -13,24 +13,31 @@ export default (state = initialState, action) => {
 
   switch (type) {
     case CHANGE_COURSE_FIELD:
-      const {field} = payload;
+      const { field } = payload;
       return {
         ...state,
-        curField:field
-      }
+        curField: field,
+      };
+
+    case CHANGE_SHOW_TYPE:
+      const { showType } = payload;
+      return {
+        ...state,
+        showType: showType,
+      };
     case GET_COURSE_FIELD_LIST:
       const { list: coursefieldList } = payload;
       return {
         ...state,
-        coursefieldList
+        coursefieldList,
       };
     case GET_COURSE_LIST:
       const { list: courseList, total } = payload;
-      console.log('payload',courseList);
+      console.log('payload', courseList);
       return {
         ...state,
         courseList,
-        total
+        total,
       };
     default:
       return state;

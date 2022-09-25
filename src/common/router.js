@@ -129,6 +129,13 @@ export const getRouterData = () => {
       path: '/modalform1',
       component: dynamicWrapper(() => import('../pages/Modalform1'))
     },
+
+    '/modal/modalform2': {
+      name: 'modalform2',
+      path: '/modalform2',
+      component: dynamicWrapper(() => import('../pages/Modalform2'))
+    },
+
     '/exception/403': {
       name: 'exception403',
       path: '/exception/403',

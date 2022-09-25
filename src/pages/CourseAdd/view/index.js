@@ -4,8 +4,9 @@ import { Form, Button, Drawer, message } from 'antd';
 import AddForm from './component/addCourseForm';
 import CourseTypeForm from './component/courseTypeForm';
 import { getCourseFieldListAction, addCourseItemAction, addCourseCateAction } from '../actions';
+import './index.less';
 const styleObj = {
-  width: '80%',
+  width: '90%',
   margin: '0 auto',
 };
 const CourseAdd = (props) => {

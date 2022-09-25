@@ -2,21 +2,35 @@ import React from 'react';
 import { Route, Redirect, Switch } from "react-router-dom";
 import { connect } from 'react-redux';
 
-import { Layout, Card, Input } from 'antd';
+import { Layout, Card, Input, Button } from 'antd';
 import NotFound from '../../pages/Exception/404';
 import Menu from "./Menu";
 import Breadcrumb from './Breadcrumb';
-
+import { actions as globalActions } from '../../global/index';
 import { getRoutes } from '../../utils/utils';
 
+import {
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
 
+} from '@ant-design/icons';
 
 const { Header, Content, Footer, Sider } = Layout;
 
 class BasicLayout extends React.Component {
 
+  handleMenuCollapse = (collapsed) => {
+    const { dispatch } = this.props;
+    dispatch(
+      globalActions.updateLayoutCollapsed({
+        collapsed: !collapsed
+      })
+    )
+  }
+
   render() {
-    const { menus, routes, location, match } = this.props;
+    const { menus, routes, location, match, collapsed } = this.props;
+    console.log('collapsed', collapsed)
     return (
       <Layout style={{
         height: '100vh'
@@ -26,17 +40,31 @@ class BasicLayout extends React.Component {
           height: '100%',
           position: 'fixed',
           left: 0
-        }}>
+        }}
+          collapsed={collapsed}
+        // onCollapse={() => this.handleMenuCollapse(collapsed)}
+        >
           <Menu menus={menus} location={location} />
+          {/* <Button onClick={() => this.handleMenuCollapse(collapsed)}>测试</Button> */}
+          <Button
+            onClick={() => this.handleMenuCollapse(collapsed)}
+            style={{
+              position: 'absolute',
+              bottom: 30,
+              left: 20
+            }}
+          >
+            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          </Button>
         </Sider>
-        <Layout style={{ marginLeft: 200 }}>
+        <Layout style={{ marginLeft: `${collapsed ? 84 : 200}px `, animationDelay: '0.2s' }}>
           <Header style={{ background: '#fff', paddingLeft: 20 }}>
             <Breadcrumb />
           </Header>
           <Content
             style={{ margin: '24px 16px 0', overflow: 'initial' }}
           >
-            <Card>
+            <Card >
               <Switch>
                 {getRoutes(match.path, routes).map(route => {
                   return (
@@ -49,6 +77,7 @@ class BasicLayout extends React.Component {
                   );
                 })}
                 <Redirect exact from="/" to="/home" />
+                <Redirect exact from="/home/indtroduce" to="/home" />
                 <Route render={NotFound} />
               </Switch>
             </Card>
@@ -60,7 +89,7 @@ class BasicLayout extends React.Component {
 }
 
 const mapStateToProps = state => ({
-
+  ...state.global,
 });
 
 const mapDispatchToProps = dispatch => ({ dispatch });

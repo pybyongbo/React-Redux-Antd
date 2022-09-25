@@ -1,6 +1,9 @@
 // tab选项卡数据
 export const GET_COURSE_FIELD_LIST = 'get_course_field_list';
 
+// 列表是否显示加载中loading动画
+export const COURSE_LIST_IS_LOADING = 'course_list_is_loading';
+
 // 课程分类数据
 export const GET_COURSE_LIST = 'get_course_list';
 

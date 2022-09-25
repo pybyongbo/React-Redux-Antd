@@ -6,6 +6,7 @@ import EditCateForm from './component/courseTypeForm'
 import {
   getCourseCateListAction,
   updateCourseCateAction,
+  findCourseListByCateAction,
   deleteCourseCateAction
 } from '../actions';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
@@ -51,17 +52,28 @@ const CourseCateList = (props) => {
     });
   }
 
-  const deleteItem = (obj) => {
+  const deleteItem = async (obj) => {
     setRecord(obj);
+    const { result } = await tipsCourseListByCate({
+      fieldType: obj.fieldType
+    });
+    console.log(result);
+
+    const params = Object.assign({}, obj, { ids: result.ids });
+
+    console.log('params', params);
+
+    const cids = JSON.stringify(result.ids);
+
     confirm({
       title: '你确定要删除该条数据吗?',
       icon: <ExclamationCircleOutlined />,
-      content: '删除后,分类列表将不再展示该条数据',
+      content: <p>该分类下面有<strong style={{ color: 'red' }}>{result?.listCount}</strong>条课程数据,删除后,分类列表将不再展示该条数据.<br /> <span style={{ color: 'red' }}>并且删除该分类下面的课程列表数据,{cids}</span></p>,
       okText: '删除',
       okType: 'danger',
       centered: true,
       onOk() {
-        return sureDeleteCourseCate(obj);
+        return sureDeleteCourseCate(params);
       },
       onCancel() {
         console.log('Cancel');
@@ -70,8 +82,17 @@ const CourseCateList = (props) => {
 
   }
 
-  const sureDeleteCourseCate = async ({ id }) => {
-    const res = await dispatch(deleteCourseCateAction({ id }));
+  const tipsCourseListByCate = async ({ fieldType }) => {
+    const res = await dispatch(findCourseListByCateAction({ fieldType }));
+    const { code, message: msg } = res;
+    if (code != 0) {
+      message.error(msg);
+    }
+    return res;
+  }
+
+  const sureDeleteCourseCate = async ({ id, ids }) => {
+    const res = await dispatch(deleteCourseCateAction({ id, ids }));
     const { code, message: msg } = res;
     if (code === 0) {
       message.success('删除成功');

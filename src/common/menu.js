@@ -4,6 +4,18 @@ const menuData = [
     path: 'home',
     name: '首页',
     icon: 'indent',
+    children: [
+      {
+        key: 'indtroduce',
+        name: '系统介绍',
+        path: 'indtroduce',
+      },
+      // {
+      //   key: 'list',
+      //   name: '文章列表',
+      //   path: 'list',
+      // },
+    ],
   },
   {
     path: 'article',

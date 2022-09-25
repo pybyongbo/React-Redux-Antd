@@ -1,4 +1,4 @@
-import { GET_COURSE_FIELD_LIST, GET_COURSE_LIST, CHANGE_COURSE_FIELD, CHANGE_SHOW_TYPE } from './actionTypes';
+import { GET_COURSE_FIELD_LIST, GET_COURSE_LIST, CHANGE_COURSE_FIELD, CHANGE_SHOW_TYPE, COURSE_LIST_IS_LOADING } from './actionTypes';
 import { fetchCourseFieldList, fetchCourseList } from './service';
 
 
@@ -32,7 +32,6 @@ export const getCourseFieldListAction = () => {
         dispatch({
           type: GET_COURSE_FIELD_LIST,
           payload: {
-            // total:postList.total,
             list: result
           }
         });
@@ -51,24 +50,38 @@ export const getCourseFieldListAction = () => {
 export const getCourseListAction = (params) => {
   return async dispatch => {
     try {
-      // dispatch({
-      //     type: FETCH_LIST_BEGIN
-      // });
-      const { code, message, result } = await fetchCourseList(params);
-      console.log('code,message,result', code, message, result)
+      dispatch({
+        type: COURSE_LIST_IS_LOADING,
+        payload: {
+          courseListLoading: true
+        }
+      });
+      const { code, message, result, total, cpage } = await fetchCourseList(params);
+      console.log('code,message,result cpage', params, code, message, result, cpage)
       if (code == 0) {
         dispatch({
           type: GET_COURSE_LIST,
           payload: {
-            list: result
+            list: result,
+            total: total,
+            current: cpage,
+            field: params?.field || -1
           }
         });
       }
+      dispatch({
+        type: COURSE_LIST_IS_LOADING,
+        payload: {
+          courseListLoading: false
+        }
+      });
     } catch (error) {
-      // dispatch({
-      //     type: FETCH_LIST_ERROR,
-      //     data: { error: error }
-      // });
+      dispatch({
+        type: COURSE_LIST_IS_LOADING,
+        payload: {
+          courseListLoading: false
+        }
+      });
       throw new Error(error);
     }
   };

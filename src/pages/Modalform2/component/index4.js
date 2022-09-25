@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import React, { createRef} from 'react';
 import { Button, Row, Col, Form, Input, Select, Tooltip, Icon, message, Divider, Modal } from 'antd';
 
 
@@ -7,7 +7,7 @@ const App = (props) => {
 
   const formRef = createRef();
 
-  const { visibleform4, handleCloseDialog4, handSubmitform4 } = props;
+  const { visibleform4,handleCloseDialog4,handSubmitform4 } = props;
 
   // const handleModalOkClick = () =>{
 
@@ -17,7 +17,7 @@ const App = (props) => {
   //   handSubmitform4(values);
   // }
 
-  const onFinish = (values) => {
+  const onFinish = (values) =>{
     handSubmitform4(values);
   }
 
@@ -32,29 +32,27 @@ const App = (props) => {
       onCancel={handleCloseDialog4}
       footer={[
         <Button type="primary" form="myForm" key="submit" htmlType="submit">
-          确认
+            确认
         </Button>,
         <Button key="cancel" onClick={handleCloseDialog4}>
-          取消
+            取消
         </Button>
-      ]}
+        ]}
     >
 
       <Form
 
         id="myForm"
         labelAlign="right"
-        labelCol={{ span: 4 }}
+        labelCol={{span:4}}
         onFinish={onFinish}
       >
         <Form.Item
           label="用户名"
           name="username"
           rules={[
-            {
-              required: true,
-              message: '必填'
-            }
+           {required:true,
+          message:'必填'}
           ]}
         >
           <Input />

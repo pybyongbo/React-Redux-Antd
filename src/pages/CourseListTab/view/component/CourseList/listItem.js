@@ -11,7 +11,7 @@ const ListItem = (props) => {
       </div>
       <h1 className="course-tt">
         <a className="course-lk">
-          {item.title}
+          {item.id} -- {item.title}
         </a>
       </h1>
       <div className={['price', item.price === 0 ? 'free' : ''].join(" ")}>

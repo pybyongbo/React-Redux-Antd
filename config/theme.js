@@ -5,7 +5,7 @@ module.exports = {
     'link-color': '#4a70ff', // 链接色
     'success-color': '#e2fee8', // 成功色
     'warning-color': '#fff6ea', // 警告色
-    'error-color': '#ffebee', // 错误色
+    // 'error-color': '#ffebee', // 错误色
     'font-size-base': '14px', // 主字号
     'heading-color': '#1E2330', // 标题色
     'text-color': '#1E2330', //主文本色

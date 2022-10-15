@@ -30,23 +30,23 @@ export default class NavMenu extends React.Component {
         };
     }
 
-    componentDidMount() {
-        const { location } = this.props;
-        this.setState({
-            selectedKeys: this.computeSelectedMenuItem(location),
-            openKeys: this.computeOpenKeys(location)
-        });
-    }
+    // componentDidMount() {
+    //     const { location } = this.props;
+    //     this.setState({
+    //         selectedKeys: this.computeSelectedMenuItem(location),
+    //         openKeys: this.computeOpenKeys(location)
+    //     });
+    // }
 
-    componentWillReceiveProps(nextProps) {
-        const { location: nextLocation } = nextProps;
-        const { location } = this.props;
-        if (nextLocation.pathname !== location.pathname) {
-            this.setState({
-                selectedKeys: this.computeSelectedMenuItem(nextLocation)
-            });
-        }
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     const { location: nextLocation } = nextProps;
+    //     const { location } = this.props;
+    //     if (nextLocation.pathname !== location.pathname) {
+    //         this.setState({
+    //             selectedKeys: this.computeSelectedMenuItem(nextLocation)
+    //         });
+    //     }
+    // }
 
     computeSelectedMenuItem = location => {
         const { pathname } = location;
@@ -97,7 +97,7 @@ export default class NavMenu extends React.Component {
                 this.subMenus[path] = true;
                 return (
                     <SubMenu title={
-                    // <span> <Icon type="appstore" />{route.name}</span>
+
                     route.icon ? (
                             <span>
                                 {getIcon(route.icon)}
@@ -107,7 +107,7 @@ export default class NavMenu extends React.Component {
                             route.name
                         )
 
-                    } 
+                    }
                     key={route.path}
                     >
                         {this.renderMenus(route.children, path)}
@@ -137,12 +137,14 @@ export default class NavMenu extends React.Component {
         const { selectedKeys,openKeys } = this.state;
         console.log('selectedKeys',selectedKeys)
         return (
+
             <Menu
                 theme="dark"
                 mode="inline"
                 openKeys={openKeys}
                 onOpenChange={this.onOpenChange} selectedKeys={selectedKeys}>
                 {this.renderMenus(menus)}
+
             </Menu>
         );
     }

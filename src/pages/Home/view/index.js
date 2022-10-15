@@ -12,7 +12,7 @@ class IndexPage extends PureComponent {
             <div className={styles.postList}>
 
                 <h2>前端路由与菜单</h2>
-                <Divider dashed />
+                {/* <Divider dashed /> */}
                 <Row className={styles.list} gutter={30}>
                     <Col span={12} >
                         <Card title="配置菜单生成路由">

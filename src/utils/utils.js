@@ -31,3 +31,10 @@ export function getRoutes(path, routerData) {
     console.log('renderRoutes',renderRoutes)
     return renderRoutes;
 }
+
+export function filterData(data, field) {
+  if (field === -1) {
+    return data;
+  }
+  return data.filter(item => item.fieldType === field);
+}

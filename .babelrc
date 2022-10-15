@@ -4,6 +4,7 @@
         "@babel/plugin-transform-runtime",
         "@babel/plugin-syntax-dynamic-import",
         "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-proposal-optional-chaining",
         ["import", { "libraryName": "antd", "style": true }]
     ]
 }

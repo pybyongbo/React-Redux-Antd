@@ -21,6 +21,7 @@ export default (state = initialState, action) => {
             };
         case GET_POST_LIST:
             const { list: postList, total } = payload;
+            debugger
             return {
                 ...state,
                 fetchListPending: false,

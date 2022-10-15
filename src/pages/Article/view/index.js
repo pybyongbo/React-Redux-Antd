@@ -16,6 +16,7 @@ class ArticleList extends PureComponent {
         }
     };
     componentDidMount() {
+        console.log('this.props',this.props)
         this.filterPostList({});
     }
 
@@ -101,7 +102,9 @@ class ArticleList extends PureComponent {
                     className="mo-table"
                     rowKey="id"
                     columns={columns}
-                    dataSource={postList.data || []}
+                    // dataSource={postList.data || []}
+                    dataSource={postList|| []}
+
                     loading={fetchListPending}
                     pagination={{
                         current,
@@ -118,9 +121,12 @@ class ArticleList extends PureComponent {
     }
 }
 
-const mapStateToProps = state => ({
-    ...state.postList
-});
+const mapStateToProps = state =>{
+  debugger
+  return {
+    postList:state.postList.postList
+  }
+};
 
 const mapDispatchToProps = dispatch => ({ dispatch });
 

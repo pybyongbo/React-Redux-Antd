@@ -6,6 +6,6 @@ export async function fetchPostList(data) {
         method: 'post',
         data
     });
-
+    console.log(123,response.data)
     return response.data;
 }

@@ -20,8 +20,8 @@ module.exports = assetsPublicPath => ({
     proxy: {
         '/post': {
             // target: 'http://api.annajunen.top',
-            // target: 'http://koa2.901web.com',
-            target: 'http://localhost:4560',
+            target: 'http://koa2.901web.com',
+            // target: 'http://localhost:4560',
             changeOrigin: true,
             // pathRewrite: {
             //     "^/papi": ""

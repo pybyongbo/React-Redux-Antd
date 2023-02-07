@@ -5,16 +5,13 @@ import { Button, Row, Col, Table, Tooltip, message, Divider, Card } from 'antd';
 import styles from './index.less';
 
 class IndexPage extends PureComponent {
-
     render() {
-
         return (
             <div className={styles.postList}>
-
-                <h2>前端路由与菜单</h2>
+                <h2>前端路由与菜单配置</h2>
                 {/* <Divider dashed /> */}
                 <Row className={styles.list} gutter={30}>
-                    <Col span={12} >
+                    <Col span={12}>
                         <Card title="配置菜单生成路由">
                             <ul>
                                 <li>1.一级菜单,二级菜单展示</li>
@@ -37,8 +34,6 @@ class IndexPage extends PureComponent {
                         </Card>
                     </Col>
                 </Row>
-
-
             </div>
         );
     }

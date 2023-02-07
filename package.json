@@ -9,7 +9,7 @@
     "@wangeditor/editor": "^5.1.11",
     "@wangeditor/editor-for-react": "^1.0.5",
     "antd": "^4.19.5",
-    "axios": "^0.18.0",
+    "axios": "^0.21.2",
     "babel-polyfill": "^6.26.0",
     "caniuse-lite": "^1.0.30001281",
     "classnames": "^2.2.6",

@@ -96,7 +96,8 @@ const CourseTabList = (props) => {
     return (
         <div className="list-wrapper">
             <h1>
-                React+Redux+Antd实现课程列表: {courseListLoading}
+                {/* {JSON.stringify(courseListLoading)} */}
+                React+Redux+Antd实现课程列表:
                 <span style={{ marginLeft: 5, color: 'red', fontSize: 12 }}>需要开启本地后端服务才能看到效果</span>
             </h1>
 

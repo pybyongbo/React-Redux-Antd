@@ -14,9 +14,6 @@ const CourseList = (props) => {
         console.log(props);
         props.history.push({
             pathname: `/article/detail/${id}`,
-            // state: {
-            //     id: id,
-            // },
         });
     };
 
@@ -27,7 +24,7 @@ const CourseList = (props) => {
                     <ul className="course-list">
                         {listData && listData.length > 0 && filterData(listData, curField).length > 0 ? (
                             filterData(listData, curField)?.map((item, index) => {
-                                return <CourseItem key={index} item={item} />;
+                                return <CourseItem key={index} item={item} gotoDetail={() => gotoDetail(item.id)} />;
                             })
                         ) : (
                             <Empty
@@ -71,7 +68,7 @@ const CourseList = (props) => {
                             ),
                         }}
                         renderItem={(item) => (
-                            <List.Item>
+                            <List.Item onClick={() => gotoDetail(item.id)}>
                                 <Card
                                     title={
                                         item.title.length > 20 ? (
@@ -83,7 +80,7 @@ const CourseList = (props) => {
                                         )
                                     }
                                     actions={[
-                                        <EyeOutlined key="see" onClick={() => gotoDetail(item.id)} />,
+                                        <EyeOutlined key="see" />,
                                         <EditOutlined key="edit" />,
                                         <span style={{ fontSize: 12 }}>
                                             {moment(item.createtime).format('MM/DD HH:mm')}
@@ -131,5 +128,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({ dispatch });
 
-// export default CourseTabList;
 export default connect(mapStateToProps, mapDispatchToProps)(CourseList);
